@@ -173,7 +173,7 @@ int distcal() {
   digitalWrite(Trigger4, LOW);
   bDist = pulseIn(Echo4, HIGH) * 0.034 / 2;
   
-  Serial.println(fDist);
+  Serial.println (fDist);
   Serial.println (bDist);
   Serial.println (lDist);
  
