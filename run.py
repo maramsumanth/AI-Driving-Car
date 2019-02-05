@@ -69,21 +69,24 @@ GPIO.output(TRIG3, False)
 #Sensors to settle
 time.sleep(1)
 
-while True:
+GPIO.output(TRIG1, True)
+time.sleep(0.00001)
+GPIO.output(TRIG1, False)
 
-    GPIO.output(TRIG1, True)
-    time.sleep(0.00001)
-    GPIO.output(TRIG1, False)
-    GPIO.output(TRIG2, True)
-    time.sleep(0.00001)
-    GPIO.output(TRIG2, False)
-    GPIO.output(TRIG3, True)
-    time.sleep(0.00001)
-    GPIO.output(TRIG3, False)
+GPIO.output(TRIG2, True)
+time.sleep(0.00001)
+GPIO.output(TRIG2, False)
+
+GPIO.output(TRIG3, True)
+time.sleep(0.00001)
+GPIO.output(TRIG3, False)
+
+
+while True:
     
-    sensor1=0
-    sensor2=0
-    sensor3=0
+    sensor1 = 0
+    sensor2 = 0
+    sensor3 = 0
     
     while GPIO.input(ECHO1)==0:
         pulse_start = time.time()
@@ -105,31 +108,31 @@ while True:
     
     FLAG = Model(sensor1, sensor2, sensor3)
     
-    if FLAG == 1:
+    if FLAG == 1: #Forward
         GPIO.output(in1,GPIO.HIGH)
         GPIO.output(in2,GPIO.LOW)
         GPIO.output(in3,GPIO.HIGH)
         GPIO.output(in4,GPIO.LOW)
   
-    elif FLAG == 2:
+    elif FLAG == 2: #Left
         GPIO.output(in1,GPIO.LOW)
         GPIO.output(in2,GPIO.LOW)
         GPIO.output(in3,GPIO.HIGH)
         GPIO.output(in4,GPIO.LOW)
 
-    elif FLAG == 3:
+    elif FLAG == 3: #Right
         GPIO.output(in1,GPIO.HIGH)
         GPIO.output(in2,GPIO.LOW)
         GPIO.output(in3,GPIO.LOW)
         GPIO.output(in4,GPIO.LOW)
 
-    elif FLAG == 4:
+    elif FLAG == 4: #Backward
         GPIO.output(in1,GPIO.LOW)
         GPIO.output(in2,GPIO.HIGH)
         GPIO.output(in3,GPIO.LOW)
         GPIO.output(in4,GPIO.HIGH)
      
-    elif FLAG == 5:
+    elif FLAG == 5: #Stop
         GPIO.cleanup()
         break
     
