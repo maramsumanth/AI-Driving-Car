@@ -59,8 +59,11 @@ GPIO.output(in3,GPIO.LOW)
 GPIO.output(in4,GPIO.LOW)
 
 
-p = GPIO.PWM(enA,1000)
-p.start(25)
+p1 = GPIO.PWM(enA,1000)
+p1.start(25)
+
+p2 = GPIO.PWM(enB,1000)
+p2.start(25)
 
 GPIO.output(TRIG1, False)
 GPIO.output(TRIG2, False)
@@ -88,21 +91,21 @@ while True:
     sensor2 = 0
     sensor3 = 0
     
-    while GPIO.input(ECHO1)==0:
+    while GPIO.input(ECHO1) == 0:
         pulse_start = time.time()
-    while GPIO.input(ECHO1)==1:
+    while GPIO.input(ECHO1) == 1:
         pulse_end = time.time()   
     sensor1 = round((pulse_end - pulse_start)*17150, 2)
     
-    while GPIO.input(ECHO2)==0:
+    while GPIO.input(ECHO2) == 0:
         pulse_start = time.time()
-    while GPIO.input(ECHO2)==1:
+    while GPIO.input(ECHO2) == 1:
         pulse_end = time.time()   
     sensor2 = round((pulse_end - pulse_start)*17150, 2)
     
-    while GPIO.input(ECHO3)==0:
+    while GPIO.input(ECHO3) == 0:
         pulse_start = time.time()
-    while GPIO.input(ECHO3)==1:
+    while GPIO.input(ECHO3) == 1:
         pulse_end = time.time()   
     sensor3 = round((pulse_end - pulse_start)*17150, 2)
     
@@ -138,3 +141,18 @@ while True:
     
     time.sleep(0.01)
     
+# Reset all the GPIO pins by setting them to LOW
+GPIO.output(in1, GPIO.LOW)
+GPIO.output(in2, GPIO.LOW)
+GPIO.output(enA, GPIO.LOW)
+GPIO.output(in3, GPIO.LOW)
+GPIO.output(in4, GPIO.LOW)
+GPIO.output(enB, GPIO.LOW) 
+
+GPIO.setup(TRIG1,GPIO.LOW)
+GPIO.setup(TRIG2,GPIO.LOW)
+GPIO.setup(TRIG3,GPIO.LOW)
+
+GPIO.setup(ECHO1,GPIO.LOW)
+GPIO.setup(ECHO2,GPIO.LOW)
+GPIO.setup(ECHO3,GPIO.LOW)
