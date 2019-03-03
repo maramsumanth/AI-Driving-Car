@@ -47,10 +47,10 @@ GPIO.output(in3,GPIO.LOW)
 GPIO.output(in4,GPIO.LOW)
  
 p1 = GPIO.PWM(enA,1000)
-p1.start(35)
+p1.start(40)
  
 p2 = GPIO.PWM(enB,1000)
-p2.start(35)
+p2.start(40)
  
 def distance():
     #print(1)
@@ -136,8 +136,9 @@ if __name__ == '__main__':
     try:
         while True:
            FLAG=int(input())
-	   if FLAG == 1: #Forward
-		while True:
+	       if FLAG == 1: #Forward
+           t_end = time.time() + 0.5
+            while time.time() < t_end:
 		    sensor1 = distance()
             
            
@@ -155,6 +156,8 @@ if __name__ == '__main__':
                     print("forward")
    
             elif FLAG == 2: #Right
+                t_end = time.time() + 0.5
+            while time.time() < t_end:
 		sensor1 = distance()
             
            
@@ -174,6 +177,8 @@ if __name__ == '__main__':
                 print("right")
    
             elif FLAG == 3: #Left
+                t_end = time.time() + 0.5
+            while time.time() < t_end:
 		sensor1 = distance()
             
            
@@ -193,6 +198,8 @@ if __name__ == '__main__':
                 print("left")
    
             elif FLAG == 4: #Backward
+                t_end = time.time() + 0.5
+            while time.time() < t_end:
 		sensor1 = distance()
             
            
