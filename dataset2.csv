@@ -1,29 +1,3 @@
-
-PS3 Bluetooth Library Started
-Bluetooth Dongle Initialized
-No response to HCI Reset
-HCI Reset complete
-Write class of device
-Local Bluetooth Address: 00:1A:7D:DA:71:13
-Wait For Incoming Connection Request
-Dualshock 3 Controller Connected
-Bluetooth Address was set to: 00:1A:7D:DA:71:13
-Bluetooth Dongle Initialized
-No response to HCI Reset
-HCI Reset complete
-Write class of device
-Local Bluetooth Address: 00:1A:7D:DA:71:13
-Wait For Incoming Connection Request
-Keyboard is connecting
-Incoming Connection Request
-Remote Name: PLAYSTATION(R)3Conteroller-PAN
-Connected to Device: 07:F0:8F:6E:63:25
-HID Control Incoming Connection Request
-HID Control Successfully Configured
-HID Interrupt Incoming Connection Request
-HID Interrupt Successfully Configured
-Wait For Incoming Connection Request
-Dualshock 3 Controller Enabled
 Stop
 34
 35
@@ -136456,4 +136430,3 @@ Stop
 63
 7
 20
-Stop
