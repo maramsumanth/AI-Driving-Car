@@ -1,23 +1,25 @@
 import RPi.GPIO as GPIO
 import time
-GPIO.setwarnings(False)
-#GPIO Mode (BOARD / BCM)
-GPIO.setmode(GPIO.BCM)
 import csv
 import numpy as np
 import pandas as pd
- 
+from sklearn.preprocessing import StandardScaler
+
+
+GPIO.setwarnings(False)
+#GPIO Mode (BOARD / BCM)
+GPIO.setmode(GPIO.BCM)
+
 A = pd.read_csv("sensor1.csv")
 B = pd.read_csv("sensor2.csv")
 C = pd.read_csv("sensor3.csv")
 X = np.hstack([A,B,C])
 y = pd.read_csv("commands.csv")
 
-from sklearn.preprocessing import StandardScaler
 scaler = StandardScaler()
-X = scaler.fit_transform( X )
+X = scaler.fit_transform(X)
 from sklearn.ensemble import RandomForestClassifier
-rf = RandomForestClassifier(n_estimators=10, oob_score=True, random_state=123456, max_depth=10,n_jobs=-1)
+rf = RandomForestClassifier(n_estimators = 10, oob_score = True, random_state = 123456, max_depth = 10, n_jobs = -1)
 rf.fit(X,y)
 print("Done Training")
 
@@ -59,11 +61,9 @@ GPIO.output(in3,GPIO.LOW)
 GPIO.output(in4,GPIO.LOW)
  
 p1 = GPIO.PWM(enA,1000)
-#p1.start(44)
- 
 p2 = GPIO.PWM(enB,1000)
-#p2.start(44)
- 
+
+
 def distance1():
 
     GPIO.output(TRIG1, True)
@@ -80,8 +80,8 @@ def distance1():
         StopTime = time.time()
 
     TimeElapsed = StopTime - StartTime
-    distance = int((TimeElapsed * 34300) / 2)
-    return distance
+    distance1 = int((TimeElapsed * 34300) / 2)
+    return distance1
 
 
 def distance2():
@@ -159,7 +159,8 @@ if __name__ == '__main__':
                 GPIO.output(in3,GPIO.HIGH)
                 GPIO.output(in4,GPIO.LOW)
                 print("right")
-
+		
+	    print([sensor3,sensor2,sensor1])
 
             yolo = np.array([sensor3,sensor2,sensor1])
             yolo.reshape(3,1)
