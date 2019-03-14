@@ -8,7 +8,6 @@
 USB Usb;              //USBHub Hub1(&Usb); // Some dongles have a hub inside
 
 BTD Btd(&Usb);        // You have to create the Bluetooth Dongle instance like so
-/* You can create the instance of the class in two ways */
 PS3BT PS3(&Btd);    // This will just create the instance
 //PS3BT PS3(&Btd, 0x00, 0x15, 0x83, 0x3D, 0x0A, 0x57);    // This will also store the bluetooth address -
 // this can be obt
@@ -18,17 +17,17 @@ int motorSpeedA = 0;
 int motorSpeedB = 0;
 
 
-int rx, ry;
+int rx, ry;          //Analog value of Hats
 
-#define enA 10       //Move
+#define enA 10       //Motor1
 #define in1 22
 #define in2 23
-#define enB 11
+#define enB 11       //Motor1
 #define in3 24
 #define in4 25
 
-
-#define trigPin1 8
+//Ultrasonic Sensor pin define
+#define trigPin1 8   
 #define echoPin1 9
 #define trigPin2 4
 #define echoPin2 5
@@ -67,20 +66,19 @@ void setup()
 
 }
  
-void loop() {
+void loop() 
+{
 
   Usb.Task();
 
   if (PS3.PS3Connected || PS3.PS3NavigationConnected)
-  { //Serial.println(PS3.getAnalogHat(RightHatY));Serial.println(PS3.getAnalogHat(RightHatX));
-    
-    //RightHatY (Y-Axis of Right) used for forward and backward control
+  { 
     rx = PS3.getAnalogHat(RightHatX);
     ry = PS3.getAnalogHat(RightHatY);
     
     
     if (ry <= 115 && rx == 127)     //Forward
-    { //distcal();
+    { 
       Serial.println("Forward");
       digitalWrite(in1, HIGH);  //MOTOR A    // Also HIGH for clockwise (Set accordingly)
       digitalWrite(in2, LOW);
@@ -93,7 +91,7 @@ void loop() {
     }
 
     else if (ry >= 140 && rx == 127)     //Backward
-    { //distcal();
+    { 
       Serial.println("Backward");
       digitalWrite(in1, LOW);  //MOTOR A
       digitalWrite(in2, HIGH);
@@ -108,7 +106,7 @@ void loop() {
 
     // RightHatX (X-Axis of Right) is used for left and right control;
     else if (rx >= 140 && ry == 127)     //Right
-    { //distcal();
+    { 
       Serial.println("Right");
       digitalWrite(in1, HIGH);  //MOTOR A   forward move
       digitalWrite(in2, LOW);
@@ -120,7 +118,7 @@ void loop() {
     }
 
     else if (rx < 115 && ry == 127)     //Left
-    { //distcal();
+    { 
       Serial.println("Left");
       digitalWrite(in1, LOW);  //MOTOR A    backward
       digitalWrite(in2, LOW);
@@ -135,7 +133,7 @@ void loop() {
 
     
     else
-    { //distcal();
+    { 
       Serial.println("Stop");
       motorSpeedA = 0;
       motorSpeedB = 0;
@@ -143,8 +141,7 @@ void loop() {
    
     analogWrite(enA, motorSpeedA); // Send PWM signal to motor A
     analogWrite(enB, motorSpeedB); // Send PWM signal to motor B
-    //distcal();
-    xyz();
+    measuredist();
   }
   
 }
@@ -161,7 +158,7 @@ distance = (duration/2) / 29.1;
  
 }
 
-void xyz()
+void measuredist()
 {
   SonarSensor(trigPin1, echoPin1);
   RightSensor = distance;
@@ -170,10 +167,10 @@ void xyz()
   SonarSensor(trigPin3, echoPin3);
   FrontSensor = distance;
  
-  Serial.println(LeftSensor);   //actual front @ashish
+  Serial.println(FrontSensor);   
+ //Serial.print(" - ");
+  Serial.println(RightSensor);    
   //Serial.print(" - ");
-  Serial.println(FrontSensor);    //actual right @ashish
-  //Serial.print(" - ");
-  Serial.println(RightSensor);      //actual left @ashish
+  Serial.println(LeftSensor);      
 
 }
