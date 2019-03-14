@@ -6,10 +6,6 @@ GPIO.setmode(GPIO.BCM)
 import csv
 import numpy as np
 import pandas as pd
-S7=[]
-S5=[]
-S6=[]
-ctrl2=[]
  
 A = pd.read_csv("/home/pi/Desktop/training_data/sens5.csv")
 B = pd.read_csv("/home/pi/Desktop/training_data/sens6.csv")
