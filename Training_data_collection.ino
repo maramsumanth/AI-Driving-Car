@@ -3,30 +3,27 @@
 #ifdef dobogusinclude
 #include <spi4teensy3.h>
 #endif
-#include <SPI.h>      //Serial Peripheral Interface and it is a way to send data between microcontrollers and other small devices
+#include <SPI.h>
 
-USB Usb;              //USBHub Hub1(&Usb); // Some dongles have a hub inside
-
-BTD Btd(&Usb);        // You have to create the Bluetooth Dongle instance like so
-PS3BT PS3(&Btd);    // This will just create the instance
-//PS3BT PS3(&Btd, 0x00, 0x15, 0x83, 0x3D, 0x0A, 0x57);    // This will also store the bluetooth address -
-// this can be obt
-
+USB Usb;
+BTD Btd(&Usb);  
+PS3BT PS3(&Btd);
 
 int motorSpeedA = 0;
 int motorSpeedB = 0;
 
 
-int rx, ry;          //Analog value of Hats
+int rx, ry;
 
-#define enA 10       //Motor1
+//Define Motor pins
+#define enA 10
 #define in1 22
 #define in2 23
-#define enB 11       //Motor1
+#define enB 11
 #define in3 24
 #define in4 25
 
-//Ultrasonic Sensor pin define
+//Define Ultrasonic Sensor pins
 #define trigPin1 8   
 #define echoPin1 9
 #define trigPin2 4
@@ -38,16 +35,18 @@ long duration, distance, RightSensor,BackSensor,FrontSensor,LeftSensor;
  
 void setup()
 {
+ 
   Serial.begin(115200);
-
   #if !defined(__MIPSEL__)
-    while (!Serial); // Wait for serial port to connect - used on Leonardo, Teensy and other boards with built-in USB CDC serial connection
+  while (!Serial);
   #endif
 
   if (Usb.Init() == -1)
-  { Serial.print(F("\r\nOSC did not start"));
-    while (1); //halt
+  { 
+   Serial.print(F("\r\nOSC did not start"));
+   while (1); //halt
   }
+
   Serial.print(F("\r\nPS3 Bluetooth Library Started"));
 
   pinMode(enA, OUTPUT);   
@@ -80,23 +79,23 @@ void loop()
     if (ry <= 115 && rx == 127)     //Forward
     { 
       Serial.println("Forward");
-      digitalWrite(in1, HIGH);  //MOTOR A    // Also HIGH for clockwise (Set accordingly)
+
+      digitalWrite(in1, HIGH);
       digitalWrite(in2, LOW);
-      
-      digitalWrite(in3, HIGH);  //MOTOR B
+      digitalWrite(in3, HIGH);
       digitalWrite(in4, LOW);
+
       motorSpeedA = map(ry, 115, 0, 0, 100);
       motorSpeedB = map(ry, 115, 0, 0, 100);
-      
     }
 
-    else if (ry >= 140 && rx == 127)     //Backward
+    else if (ry >= 140 && rx == 127)    //Backward
     { 
       Serial.println("Backward");
-      digitalWrite(in1, LOW);  //MOTOR A
+     
+      digitalWrite(in1, LOW);
       digitalWrite(in2, HIGH);
-      
-      digitalWrite(in3, LOW);  //MOTOR B
+      digitalWrite(in3, LOW);
       digitalWrite(in4, HIGH);
       
       motorSpeedA = map(ry, 140, 255, 0, 100);
@@ -104,15 +103,15 @@ void loop()
       
     }
 
-    // RightHatX (X-Axis of Right) is used for left and right control;
     else if (rx >= 140 && ry == 127)     //Right
     { 
       Serial.println("Right");
-      digitalWrite(in1, HIGH);  //MOTOR A   forward move
+
+      digitalWrite(in1, HIGH);
       digitalWrite(in2, LOW);
-      
-      digitalWrite(in3, LOW);  //MOTOR B  backward move
+      digitalWrite(in3, LOW);
       digitalWrite(in4, LOW);
+
       motorSpeedA = map(rx, 140, 255, 0, 100);
       motorSpeedB = map(rx, 140, 255, 0, 100);
     }
@@ -120,18 +119,16 @@ void loop()
     else if (rx < 115 && ry == 127)     //Left
     { 
       Serial.println("Left");
-      digitalWrite(in1, LOW);  //MOTOR A    backward
+
+      digitalWrite(in1, LOW);
       digitalWrite(in2, LOW);
-      
-      digitalWrite(in3, HIGH);  //MOTOR B    forward
+      digitalWrite(in3, HIGH);
       digitalWrite(in4, LOW);
       
       motorSpeedA = map(rx, 115, 0, 0, 100);
       motorSpeedB = map(rx, 115, 0, 0, 100);
-      
       }
 
-    
     else
     { 
       Serial.println("Stop");
@@ -167,10 +164,8 @@ void measuredist()
   SonarSensor(trigPin3, echoPin3);
   FrontSensor = distance;
  
-  Serial.println(FrontSensor);   
- //Serial.print(" - ");
-  Serial.println(RightSensor);    
-  //Serial.print(" - ");
+  Serial.println(FrontSensor);
+  Serial.println(RightSensor);
   Serial.println(LeftSensor);      
 
 }
