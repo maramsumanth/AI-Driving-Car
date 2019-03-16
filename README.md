@@ -18,7 +18,14 @@ AI-Driving-Car
       PS3 Controller for collecting data
       Jumper wires as needed
     
+## Data Collection and Model Training
+
+   Data is collected on different mazes using arduino, where the car is controlled using PS3 controller. It is stored in text file of the form ```Command, Sensor1, Sensor2, Sensor3``` each of them are seperated by lines. Make sure to filter out the data with the Stop command in the dataset before training. Using python code this dataset is converted into sensor and command files. Finally it is trained using Random Forest Classifier(Machine Learning Algorithm), with accuracy of 93%.
+
+
 ## Setup (For Linux)
       If your Pi and laptop are on the same wifi network you can run code on Pi from your laptop with the command below.
             ssh username@ipaddress
+            
+[Here](https://drive.google.com/drive/folders/1Pr7gGW8ToveAyUVRObod15jswgyZrwg8) is the drive link to video demonstrating the assembly of the components and another video containing the final output of project.
       
