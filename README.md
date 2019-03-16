@@ -3,7 +3,7 @@ AI-Driving-Car
       
 ## Overview
 
-   This is a autonomous car which is capable of sensing its environment and moving without human input. Basically it consists of 3 ultrasonic sensors attached to the front, left and right portions of car, these will calculate the obstacle distances infront of them and send them to the pretrained Machine Learning Algorithm. This will return with a command, it is sent to the motors, which move in the desired direction (Forward/Left/Right/Backward) accordingly.
+   This is a autonomous car which is capable of sensing its environment and moving without human input. Basically it consists of 3 ultrasonic sensors attached to the front, left and right portions of car, these will calculate the obstacle distances infront of them and send them to the pretrained Machine Learning Algorithm. This will return with a command, which is sent to the motors and move in the desired direction (Forward/Left/Right/Backward) accordingly.
 
 ## Hardware Requirements
       Raspberry Pi          - 1
