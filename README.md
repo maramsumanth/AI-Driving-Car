@@ -28,6 +28,7 @@ AI-Driving-Car
 
 ## Sample maze
 
+![IMG-20190124-WA0010](https://user-images.githubusercontent.com/32808381/54482270-0be68980-4867-11e9-9c71-4d268ae18d44.jpg)
 
 
 
