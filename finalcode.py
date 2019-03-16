@@ -14,7 +14,7 @@ A = pd.read_csv("sensor1.csv")
 B = pd.read_csv("sensor2.csv")
 C = pd.read_csv("sensor3.csv")
 X = np.hstack([A,B,C])
-y = pd.read_csv("commands.csv")
+y = pd.read_csv("command.csv")
 
 scaler = StandardScaler()
 X = scaler.fit_transform(X)
