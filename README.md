@@ -26,6 +26,11 @@ AI-Driving-Car
 
    Data is collected on different mazes using arduino, where the car is controlled using PS3 controller. It is stored in text file of the form ```Command, Sensor1, Sensor2, Sensor3``` each of them are seperated by lines. Make sure to filter out the data with the Stop command in the dataset before training. Using python code this dataset is converted into sensor and command files. Finally it is trained using Random Forest Classifier(Machine Learning Algorithm), with accuracy of 93%.
 
+## Sample maze
+
+
+
+
 
 ## Setup (For Linux)
       If your Pi and laptop are on the same wifi network you can run code on Pi from your laptop with the command below.
