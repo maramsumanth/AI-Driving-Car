@@ -34,6 +34,7 @@ AI-Driving-Car
 
 
 ## Setup (For Linux)
+Make sure that all these files are in the memory card of raspberry pi.
       If your Pi and laptop are on the same wifi network you can run code on Pi from your laptop with the command below.
             ssh username@ipaddress
             
